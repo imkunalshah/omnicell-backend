@@ -42,6 +42,9 @@ public class RecipeController {
     public FetchRecipeBean fetchRecipeById(@PathVariable String id){
         try {
             Recipe recipe = repository.findRecipeById(id);
+            if (recipe == null){
+                return new FetchRecipeBean(false,"recipe doesn't exist", recipe);
+            }
             return new FetchRecipeBean(true,"success", recipe);
         }catch (Exception e){
             return new FetchRecipeBean(false,"failed", null);
