@@ -55,6 +55,9 @@ public class RecipeController {
     public FetchRecipeImageBean fetchRecipeImageById(@PathVariable String id){
         try {
             Recipe recipe = repository.findRecipeById(id);
+            if (recipe == null){
+                return new FetchRecipeImageBean(false,"recipe doesn't exist", null);
+            }
             return new FetchRecipeImageBean(true,"success", recipe.image);
         }catch (Exception e){
             return new FetchRecipeImageBean(false,"failed", null);
